@@ -25,6 +25,19 @@ class Item(models.Model):
     def get_url(self):
         return reverse('item_detail',args=[self.category.slug, self.slug])
 
+    def get_item_book(self):
+        return BookItem.objects.get(id = self.id)
+
+    def get_item_clothes(self):
+        return ClothesItem.objects.get(id = self.id)
+
+    def get_item_laptop(self):
+        return LaptopItem.objects.get(id = self.id)
+
+    def get_item_smartphone(self):
+        return SmartPhoneItem.objects.get(id = self.id)
+
+
 class BookItem(Item):
     book = models.ForeignKey(Book,on_delete = models.CASCADE)
 
@@ -37,15 +50,8 @@ class LaptopItem(Item):
     weight = models.IntegerField()
     width = models.IntegerField()
 
-class Color(models.Model):
-    name =  models.CharField(max_length=200, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
 class SmartPhoneItem(Item):
     smartphone = models.ForeignKey(SmartPhone,on_delete = models.CASCADE)
     weight = models.IntegerField()
     width = models.IntegerField()
-    color = models.ForeignKey(Color,on_delete = models.CASCADE)
+    color = models.CharField(max_length=200)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from customer.models import Customer
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
@@ -59,9 +60,12 @@ class Account(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-
     def has_perm(self,perm,obj=None):
         return self.is_admin
 
     def has_module_perms(self,add_label):
-        return True;
+        return True
+
+    def get_customer(self):
+        return Customer.objects.get(email = self.email)    
+   

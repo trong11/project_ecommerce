@@ -34,6 +34,7 @@ class Migration(migrations.Migration):
                 ('price', models.IntegerField()),
                 ('images', models.ImageField(upload_to='photos/products')),
                 ('stock', models.IntegerField()),
+                ('type',models.CharField(max_length=200,default='book')),
                 ('is_available', models.BooleanField(default=True)),
                 ('created_date', models.DateTimeField(auto_now=True)),
                 ('modified_date', models.DateTimeField(auto_now=True)),

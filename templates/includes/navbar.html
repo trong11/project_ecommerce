@@ -8,24 +8,20 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarTop4">
     <ul class="navbar-nav mr-auto">
-    	<li><span class="nav-link">Hi, <a href="#"> Sign in </a> or <a href="#"> Register </a></span></li>
-		<li><a href="#" class="nav-link"> Deals </a></li>
-		<li><a href="#" class="nav-link"> Sell </a></li>
-		<li><a href="#" class="nav-link"> Help </a></li>
+		{% if user.id is None %}
+		  
+		
+    	<li><span class="nav-link"><a href="{% url 'login' %}"> Sign in </a> or <a href="{% url 'register' %}"> Register </a></span></li>
+
+		{% else %}
+        <li><span class="nav-link">Hi,  {{ user.first_name }}   {{ user.last_name }} </span></li>
+
+		{% endif %}
     </ul>
-    <ul class="navbar-nav">
-		<li><a href="#" class="nav-link"> <img src="{% static 'images/icons/flags/US.png' %}" height="16"> Ship to </a></li>
-		<li class="nav-item dropdown">
-		 	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">   Watchlist </a>
-		    <ul class="dropdown-menu small">
-				<li><a class="dropdown-item" href="#">First item</a></li>
-				<li><a class="dropdown-item" href="#">Second item</a></li>
-				<li><a class="dropdown-item" href="#">Third item </a></li>
-		    </ul>
-		</li>
-		<li><a href="#" class="nav-link"> My shop </a></li>
+    <ul class="navbar-nav">		
+		<li><a href="{% url 'logout' %}" class="nav-link"> Log out </a></li>
 		<li><a href="#" class="nav-link"> <i class="fa fa-bell"></i> </a></li>
-		<li><a href="#" class="nav-link"> <i class="fa fa-shopping-cart"></i> </a></li>
+		<li><a href="{% url 'cart' %}" class="nav-link"> <i class="fa fa-shopping-cart"></i> </a></li>
 	</ul> <!-- list-inline //  -->
   </div> <!-- navbar-collapse .// -->
 </div> <!-- container //  -->
@@ -51,18 +47,16 @@
 
 	</div> <!-- col.// -->
 	<div class="col-lg-6 col-xl col-md-5 col-sm-12 flex-grow-1">
-		<form action="#" class="search-header">
+		<form action="{% url 'search' %}" class="search-header" method="GET">
 			<div class="input-group">
-			    <input type="text" class="form-control" placeholder="Search">
+			    <input type="text" class="form-control" placeholder="Search" name = "keyword">
 		    </div>
-		</form> <!-- search-wrap .end// -->
+		 <!-- search-wrap .end// -->
 	</div> <!-- col.// -->
 	<div class="col col-lg col-md flex-grow-0">
 	    <button class="btn btn-block btn-warning" type="submit"> Search </button>
 	</div>
-	<div class="col col-lg col-md flex-grow-0">
-	    <button class="btn btn-block btn-light" type="submit"> Advanced </button>
-	</div>
+    </form>
 </div> <!-- row.// -->
 </section> <!-- header-main .// -->
 
